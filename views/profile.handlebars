@@ -1,0 +1,65 @@
+<section>
+    <h2>Welcome to your profile</h2>
+
+    <div class="right side btns">
+        <div class="settings box">
+            <button class="settings btn">Settings</button>
+            <div class="dropdown list">
+                <a href="">My Profile</a>
+                <a href="">About</a>
+            </div>
+        </div>
+
+        <form action='/login' method="GET">
+            <button class="logout btn">Logout</button>
+        </form>
+
+    </div>
+
+    <h4>{{user.email}}</h4>
+
+    <div class="all books box">
+        <h2>Your cart</h2>
+        {{#each user.books_acquired}}
+        <div class="book box">
+            <img class="book-img" src={{book.img_path}} alt="Book Cover">
+            <h5>{{book.title}}<br>
+                {{book.author}}<br>
+                ${{book.price}}</h5>
+            <a onclick='showDelBox({{id}})'><i class="fas fa-trash-alt"></i></a>
+        </div>
+
+        {{else}}
+        <h4>No books found</h4>
+        {{/each}}
+
+        <h2 id="cartTotal"></h2>
+    </div>
+
+    <form id="del-form" action="" method="POST">
+        <div id="confirmBox" class="del confirm box">
+            Are you sure you want to delete the book ?<br><br>
+            <input type="submit" name="confirmation" value="Yes">
+            <input type="submit" name="confirmation" value="No">
+        </div>
+    </form>
+
+    <form action="/addbook" method="GET">
+        <button class="new btn">Add new book</button>
+    </form>
+
+    <script>
+        let cartTotal = document.getElementById('cartTotal');
+        cartTotal.innerHTML = 'Total: ' + 'user';
+
+        function showDelBox(bookID) {
+            let form = document.getElementById('del-form')
+            form.getAttribute("action")
+            form.setAttribute("action", '/delbook/' + bookID)
+            console.log(bookID)
+            confirmBox.style.display = 'block';
+        }
+
+    </script>
+
+</section>

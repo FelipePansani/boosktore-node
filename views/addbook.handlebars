@@ -1,0 +1,40 @@
+<section>
+    <h2>Choose a Book</h2>
+
+    <div class="right side btns">
+        <form action="/profile/{{userID}}" method="GET">
+            <button class="back btn">Back to Profile</button>
+        </form>
+    </div>
+
+    <div class="all books box">
+        {{#each Books}}
+        <div class="book box add" onclick='showConfirmBox({{id}})'>
+            <img class="book-img" src={{img_path}} alt="Book Cover">
+            <h5>{{title}}<br>
+                {{author}}<br>
+                ${{price}}</h5>
+        </div>
+        {{/each}}
+    </div>
+
+    <form id="add-form" action="" method="POST">
+        <div id="confirmBox" class="confirm box">
+            Are you sure you want to add the book ?<br><br>
+            <input type="submit" name="confirmation" value="Yes">
+            <input type="submit" name="confirmation" value="No">
+        </div>
+    </form>
+
+    <script>
+
+        function showConfirmBox(bookId) {
+            let form = document.getElementById('add-form')
+            form.getAttribute("action")
+            form.setAttribute("action", '/addbook/' + bookId)
+            console.log(bookId)
+            confirmBox.style.display = 'block';
+        }
+
+    </script>
+</section>
